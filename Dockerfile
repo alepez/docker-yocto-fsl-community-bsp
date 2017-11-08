@@ -35,3 +35,7 @@ RUN cd /opt/yocto \
 	&& cd fsl-community-bsp \
 	&& repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b morty \
 	&& repo sync
+
+COPY bitbake-wrapper.sh /bitbake-wrapper.sh
+
+RUN /bin/bash -c "/bitbake-wrapper.sh"
