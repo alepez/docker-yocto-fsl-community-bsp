@@ -26,9 +26,12 @@ ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
-RUN mkdir -p /opt/yocto
+RUN useradd --uid 30000 --create-home build
+
+RUN mkdir -p /opt/yocto && chown build /opt/yocto
+USER build
 RUN cd /opt/yocto \
 	&& mkdir -p fsl-community-bsp \
 	&& cd fsl-community-bsp \
-	&& repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b daisy \
+	&& repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b morty \
 	&& repo sync
